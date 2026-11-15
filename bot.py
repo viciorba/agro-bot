@@ -25,7 +25,7 @@ from aiogram.types import (
 )
 
 # ───────────────────────── НАСТРОЙКИ ─────────────────────────
-BOT_TOKEN = os.getenv("BOT_TOKEN", "9215874877:AAFDcn-YA2ROA8oL8Oppagb_lkHsy9NlF0Y")
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_IDS = {int(x) for x in os.getenv("ADMIN_IDS", "8961537132").split(",") if x.strip()}
 CHANNEL_ID = os.getenv("CHANNEL_ID", "@agromd_technic")
 BANNER_PATH = os.getenv("BANNER_PATH", "banner.jpg")
