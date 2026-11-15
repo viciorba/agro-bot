@@ -1,5 +1,4 @@
-import asyncio
-from aiogram import Bot, Dispatcher
+from aiohttp import web
 import asyncio
 import html
 import logging
@@ -352,7 +351,19 @@ async def reject(cb: CallbackQuery, bot: Bot):
         pass
 
 # ───────────────────────── ЗАПУСК ─────────────────────────
+async def health(request):
+    return web.Response(text="OK")
+
+async def start_web():
+    app = web.Application()
+    app.router.add_get("/", health)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, "0.0.0.0", int(os.environ.get("PORT", 10000)))
+    await site.start()
+    
 async def main():
+    await start_web()
     if not BOT_TOKEN or not ADMIN_IDS or not CHANNEL_ID:
         raise SystemExit("Задайте переменные BOT_TOKEN, ADMIN_IDS и CHANNEL_ID")
     init_db()
